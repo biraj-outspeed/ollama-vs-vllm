@@ -4,7 +4,7 @@ I've deployed Llama3.2 3B using both Ollama and vLLM on Google Cloud Run.
 
 Our end objective is this:
 - Fast as fuck cold start for autoscaling
-- Low-latency: very low TTFT & delay between tokens for realtime apps
+- Low-latency inference: very low TTFT & delay between tokens for realtime apps
 
 I've run the following experiments:
 
