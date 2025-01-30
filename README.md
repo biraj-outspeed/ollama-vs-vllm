@@ -2,6 +2,10 @@
 
 I've deployed Llama3.2 3B using both Ollama and vLLM on Google Cloud Run.
 
+Our end objective is this:
+- Fast as fuck cold start for autoscaling
+- Low-latency: very low TTFT & delay between tokens for realtime apps
+
 I've run the following experiments:
 
 - **Sequential, one Cold-start**: 10 sequential requests when the _zero_ container instances are running
@@ -27,6 +31,8 @@ Analysis is available at [`data/analysis.ipynb`](data/analysis.ipynb).
 
 - In best case (i.e no concurrency), Ollama was able to serve at 63 tokens per second, while vLLM was only able to serve at 31-35 tokens per seconds for all levels of concurrency.
 
+- EDIT: I increased OLLAMA_NUM_PARALLEL to 10 and noticed Ollama was faster than vLLM for 10 concurrent requests.
+
 ## Unknowns & Questions to explore
 
 - We have to understand how these inference engines are utilizing the GPUs. If they are under utilizing, then we can expect to see a higher latency.
@@ -39,11 +45,9 @@ ValueError: The model's max seq len (131072) is larger than the maximum number o
 
 - I decreased max_model_len to 4096. Also note that vLLM by default uses 0.9 of the GPU memory. The same is unknown to me for Ollama.
 
-- I increased OLLAMA_NUM_PARALLEL to 10 and noticed Ollama was faster than vLLM for 10 concurrent requests.
-
 ## Next steps
 
-Optimize the shit out of vLLM. I am not sure about going with Ollama. I am biased towards vLLM.
+Optimize the shit out of vLLM or Ollama whatever.
 
 And I read about run.ai's Model Streamer. Their benchmarks are impressive. [Here they are.](https://github.com/run-ai/runai-model-streamer/blob/master/docs/src/benchmarks.md). It is supported by vLLM.
 
