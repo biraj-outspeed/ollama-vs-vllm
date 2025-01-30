@@ -38,3 +38,11 @@ ValueError: The model's max seq len (131072) is larger than the maximum number o
 ```
 
 - I decreased max_model_len to 8192. Also note that vLLM by default uses 0.9 of the GPU memory. The same is unknown to me for Ollama.
+
+## Next steps
+
+Optimize the shit out of vLLM. I am not sure about going with Ollama. I am biased towards vLLM.
+
+And I read about run.ai's Model Streamer. Their benchmarks are impressive. [Here they are.](https://github.com/run-ai/runai-model-streamer/blob/master/docs/src/benchmarks.md). It is supported by vLLM.
+
+There's also [tensorizer](https://github.com/coreweave/tensorizer).
