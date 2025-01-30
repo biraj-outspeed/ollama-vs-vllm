@@ -21,6 +21,20 @@ Analysis is available at [`data/analysis.ipynb`](data/analysis.ipynb).
 
 ## Observation
 
+- Cold-start latency is higher in vLLM than Ollama, but once it's up and running, TTFT is lower in vLLM.
+
 - As we increased the concurrency, ollama started to perform _worse_ on TTFT (Time to First Token). vLLM's TTFT for the same experiment was under 0.6 seconds, compared to Ollama's, whose performance started degrading from 5 concurrent requests.
 
 - In best case (i.e no concurrency), Ollama was able to serve at 63 tokens per second, while vLLM was only able to serve at 31-35 tokens per seconds for all levels of concurrency.
+
+## Unknowns & Questions to explore
+
+- We have to understand how these inference engines are utilizing the GPUs. If they are under utilizing, then we can expect to see a higher latency.
+
+- I got error deploying with vLLM on both Google Cloud Run and when I did it on EC2. The error was about max sequence length exceeding GPU memory.
+
+```
+ValueError: The model's max seq len (131072) is larger than the maximum number of tokens that can be stored in KV cache (117328). Try increasing `gpu_memory_utilization` or decreasing `max_model_len` when initializing the engine.
+```
+
+- I decreased max_model_len to 8192. Also note that vLLM by default uses 0.9 of the GPU memory. The same is unknown to me for Ollama.
