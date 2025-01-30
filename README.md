@@ -37,7 +37,7 @@ Analysis is available at [`data/analysis.ipynb`](data/analysis.ipynb).
 ValueError: The model's max seq len (131072) is larger than the maximum number of tokens that can be stored in KV cache (117328). Try increasing `gpu_memory_utilization` or decreasing `max_model_len` when initializing the engine.
 ```
 
-- I decreased max_model_len to 8192. Also note that vLLM by default uses 0.9 of the GPU memory. The same is unknown to me for Ollama.
+- I decreased max_model_len to 4096. Also note that vLLM by default uses 0.9 of the GPU memory. The same is unknown to me for Ollama.
 
 ## Next steps
 
