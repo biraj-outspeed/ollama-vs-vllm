@@ -39,6 +39,8 @@ ValueError: The model's max seq len (131072) is larger than the maximum number o
 
 - I decreased max_model_len to 4096. Also note that vLLM by default uses 0.9 of the GPU memory. The same is unknown to me for Ollama.
 
+- I increased OLLAMA_NUM_PARALLEL to 10 and noticed Ollama was faster than vLLM for 10 concurrent requests.
+
 ## Next steps
 
 Optimize the shit out of vLLM. I am not sure about going with Ollama. I am biased towards vLLM.
